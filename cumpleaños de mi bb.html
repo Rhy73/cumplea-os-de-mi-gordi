@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz cumpleaños mi vida hermosa</title>
+<style>
+  :root {
+    --pink-1: #ffd6e8;
+    --pink-2: #ffb3d1;
+    --pink-3: #ff8fc4;
+    --pink-deep: #e85d9c;
+    --gold: #f7c948;
+    --red: #d6336c;
+    --paper: #fff7fa;
+    --text: #5a3349;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    min-height: 100%;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  body {
+    background: linear-gradient(160deg, var(--pink-1) 0%, var(--pink-2) 45%, var(--pink-3) 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    position: relative;
+  }
+
+  .paws-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.18;
+    background-image:
+      radial-gradient(circle at center, var(--pink-deep) 0 6px, transparent 6.5px),
+      radial-gradient(circle at center, var(--pink-deep) 0 6px, transparent 6.5px);
+    background-size: 120px 120px;
+    background-position: 0 0, 60px 60px;
+  }
+
+  .paw {
+    position: absolute;
+    font-size: 28px;
+    color: var(--pink-deep);
+    opacity: 0.22;
+    transform: rotate(var(--r, 0deg));
+    user-select: none;
+    z-index: 1;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: clamp(20px, 5vw, 36px);
+    color: var(--pink-deep);
+    text-shadow: 0 2px 8px rgba(216, 51, 124, 0.25);
+    margin: 0 0 6px;
+    z-index: 2;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .subtitulo {
+    text-align: center;
+    font-size: 15px;
+    color: var(--text);
+    margin: 0 0 22px;
+    z-index: 2;
+    opacity: 0.85;
+  }
+
+  .flotante {
+    position: fixed;
+    z-index: 30;
+    background: var(--pink-2);
+    border: 2px solid #fff;
+    border-radius: 50%;
+    width: 58px;
+    height: 58px;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(216, 51, 124, 0.3);
+    transition: transform 0.15s ease;
+  }
+
+  .flotante:hover {
+    transform: scale(1.1) rotate(-5deg);
+  }
+
+  .flotante.tocada {
+    animation: nadar 0.6s ease;
+  }
+
+  @keyframes nadar {
+    0%, 100% { transform: scale(1); }
+    30% { transform: scale(1.25) rotate(8deg); }
+    60% { transform: scale(0.95) rotate(-6deg); }
+  }
+
+  .ballena1 { top: 16%; left: 6%; }
+  .ballena3 { top: 60%; right: 6%; }
+  .gatito    { top: 36%; left: 8%; width: 76px; height: 76px; font-size: 38px; background: var(--gold); }
+  .gatito:hover { transform: scale(1.08) rotate(-4deg); }
+  .gatito.tocada { animation: nadarGato 0.6s ease; }
+  @keyframes nadarGato {
+    0%, 100% { transform: scale(1); }
+    30% { transform: scale(1.2) rotate(6deg); }
+    60% { transform: scale(0.95) rotate(-4deg); }
+  }
+
+  @media (max-width: 480px) {
+    .ballena1 { top: 8%; left: 4%; }
+    .ballena3 { top: 80%; right: 4%; }
+    .gatito { top: auto; bottom: 6%; left: 4%; }
+    .flotante { width: 48px; height: 48px; font-size: 22px; }
+    .gatito { width: 64px; height: 64px; font-size: 32px; }
+  }
+
+  .burbuja {
+    position: absolute;
+    bottom: 115%;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px) scale(0.85);
+    background: var(--pink-deep);
+    color: #fff;
+    font-size: 12px;
+    font-style: normal;
+    white-space: normal;
+    width: 170px;
+    text-align: center;
+    line-height: 1.4;
+    padding: 8px 12px;
+    border-radius: 14px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    z-index: 31;
+  }
+
+  .burbuja::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--pink-deep);
+  }
+
+  .burbuja.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+
+  .escena {
+    z-index: 2;
+    position: relative;
+    width: 320px;
+    max-width: 90vw;
+  }
+
+  .sobre {
+    width: 160px;
+    height: 110px;
+    margin: 30px auto 10px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+  }
+
+  .sobre-cuerpo {
+    position: absolute;
+    inset: 0;
+    background: var(--paper);
+    border: 2px solid var(--pink-2);
+    border-radius: 8px;
+    box-shadow: 0 10px 24px rgba(216, 51, 124, 0.35);
+  }
+
+  .sobre-cuerpo::before,
+  .sobre-cuerpo::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+
+  /* solapas laterales */
+  .sobre-cuerpo::before {
+    top: 0; left: 0;
+    border-width: 55px 0 55px 80px;
+    border-color: transparent transparent transparent var(--pink-1);
+  }
+  .sobre-cuerpo::after {
+    top: 0; right: 0;
+    border-width: 55px 80px 55px 0;
+    border-color: transparent var(--pink-1) transparent transparent;
+  }
+
+  /* solapa superior */
+  .sobre-tapa {
+    position: absolute;
+    top: -2px; left: -2px; right: -2px;
+    width: calc(100% + 4px);
+    height: 0;
+    border-style: solid;
+    border-width: 0 80px 60px 80px;
+    border-color: transparent transparent var(--pink-3) transparent;
+    filter: drop-shadow(0 3px 5px rgba(216,51,124,0.25));
+    z-index: 2;
+  }
+
+  .sello-corazon {
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 34px;
+    z-index: 3;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    animation: latido 1.8s ease-in-out infinite;
+  }
+
+  @keyframes latido {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.12); }
+  }
+
+  .escena.abierto .sobre {
+    transform: scale(0);
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .carta {
+    background:
+      repeating-linear-gradient(135deg, transparent 0 40px, rgba(232,93,156,0.05) 40px 80px),
+      var(--paper);
+    border-radius: 18px;
+    border: 3px solid var(--pink-2);
+    box-shadow: 0 25px 60px rgba(216, 51, 124, 0.35);
+    padding: 34px 28px;
+    text-align: center;
+    position: relative;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.85) translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(.34,1.56,.64,1), visibility 0s;
+    overflow: hidden;
+  }
+
+  .carta-inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .escena.abierto .carta {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1) translateY(0);
+  }
+
+  .carta h2 {
+    color: var(--pink-deep);
+    margin: 0 0 14px;
+    font-size: 22px;
+  }
+
+  .carta p {
+    line-height: 1.8;
+    font-size: 16px;
+    color: var(--text);
+    margin: 0 0 16px;
+  }
+
+  .firma {
+    font-style: italic;
+    color: var(--pink-deep);
+    font-size: 15px;
+  }
+
+  .cerrar {
+    margin-top: 6px;
+    background: var(--pink-deep);
+    color: #fff;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+  .cerrar:hover {
+    background: var(--red);
+    transform: scale(1.05);
+  }
+
+  .hint {
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--pink-deep);
+    text-align: center;
+    z-index: 2;
+    animation: bounce 1.6s ease-in-out infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); opacity: 0.8; }
+    50% { transform: translateY(-4px); opacity: 1; }
+  }
+
+  .corazon {
+    position: fixed;
+    bottom: -40px;
+    font-size: 20px;
+    color: var(--pink-deep);
+    opacity: 0.85;
+    pointer-events: none;
+    animation: flotar linear forwards;
+    z-index: 40;
+  }
+
+  @keyframes flotar {
+    0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; }
+    100% { transform: translateY(-110vh) translateX(var(--drift, 30px)) rotate(360deg); opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .corazon, .hint, .corazon-cerrado, .carta { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="paws-bg"></div>
+
+<div class="paw" style="top:8%; left:50%; --r:-15deg;">🐾</div>
+<div class="paw" style="bottom:30%; left:14%; --r:10deg;">🐾</div>
+<div class="paw" style="bottom:30%; right:14%; --r:-25deg;">🐾</div>
+
+<button class="flotante ballena1" aria-label="ballenita" data-msg="te amo mucho 🐳💗">🐳</button>
+<button class="flotante ballena3" aria-label="ballenita" data-msg="deja de darle de comer a la ballenita 🐳😂">🐳</button>
+<button class="flotante gatito" aria-label="gatito" data-msg="feliz cumpleaños mi gordi hermosa 🐱💕">🐱</button>
+
+<h1>Feliz cumpleaños mi vida hermosa</h1>
+<p class="subtitulo">Te amo mucho corazón <span class="gato">💗</span></p>
+
+<div class="escena" id="escena">
+  <div class="sobre" id="corazon">
+    <div class="sobre-cuerpo"></div>
+    <div class="sobre-tapa"></div>
+    <div class="sello-corazon">❤️</div>
+  </div>
+
+  <div class="carta">
+    <div class="carta-inner">
+      <h2>🎉 Feliz cumpleaños, mi vida hermosa 🎉</h2>
+      <p>
+        Feliz cumpleaños mi vida hermosa, te amo demasiado con todo mi corazón.
+        Hoy es un día demasiado especial para ti, mi bb que anda creciendo.
+        Quiero que sepas que te amo mucho y que sigamos aún más tiempo juntos,
+        corazón hermoso. Esta página la hice para demostrar lo mucho que te amo. 💗
+      </p>
+      <p class="firma">Con todo mi amor, para Maite Francesca 💗✨</p>
+      <button class="cerrar" id="cerrar">Cerrar con cariño 💕</button>
+    </div>
+  </div>
+</div>
+
+<div class="hint" id="hint">👆 tocá el corazón para abrir tu carta 👆</div>
+
+<script>
+  const escena = document.getElementById('escena');
+  const corazon = document.getElementById('corazon');
+  const cerrar = document.getElementById('cerrar');
+  const hint = document.getElementById('hint');
+
+  document.querySelectorAll('.flotante').forEach(b => {
+    const mensaje = b.dataset.msg;
+    b.addEventListener('click', (e) => {
+      e.stopPropagation();
+      b.classList.remove('tocada');
+      let burbuja = b.querySelector('.burbuja');
+      if (!burbuja) {
+        burbuja = document.createElement('span');
+        burbuja.className = 'burbuja';
+        burbuja.textContent = mensaje;
+        b.appendChild(burbuja);
+      }
+      requestAnimationFrame(() => {
+        b.classList.add('tocada');
+        burbuja.classList.add('visible');
+      });
+      setTimeout(() => burbuja.classList.remove('visible'), 1800);
+    });
+  });
+
+  function lanzarCorazones() {
+    const emojis = ['❤️', '💗', '💕', '💖', '💞'];
+    for (let i = 0; i < 28; i++) {
+      const c = document.createElement('div');
+      c.className = 'corazon';
+      c.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      c.style.left = Math.random() * 100 + 'vw';
+      c.style.setProperty('--drift', (Math.random() * 80 - 40) + 'px');
+      c.style.fontSize = (14 + Math.random() * 18) + 'px';
+      c.style.animationDuration = (3 + Math.random() * 3) + 's';
+      c.style.animationDelay = (Math.random() * 1.5) + 's';
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 7000);
+    }
+  }
+
+  corazon.addEventListener('click', () => {
+    escena.classList.add('abierto');
+    hint.style.opacity = '0';
+    lanzarCorazones();
+  });
+
+  cerrar.addEventListener('click', (e) => {
+    e.stopPropagation();
+    escena.classList.remove('abierto');
+    setTimeout(() => { hint.style.opacity = '0.8'; }, 600);
+  });
+</script>
+
+</body>
+</html>
